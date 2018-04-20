@@ -18,7 +18,7 @@ import { Provider, Machine, Listen } from 'rectx'
 /**
  * we create a state machine `LikeMachine` inherit from Machine
  * define a class function `handleClick` for setting state by calling `this.setState`
-*/
+ */
 class LikeMachine extends Machine {
     state = {
         isLike: false,
@@ -35,8 +35,9 @@ class LikeMachine extends Machine {
 /**
  * a simple `<Like/>` react component with property `to` and `didMount`
  * @to:array, state machine arrays, this property can be set a bunch of `Machine`
- * @didMount:function, when `<Lisent/>` component mounted, it will be fired. The arguments is the instances of `Machine`
-*/
+ * @didMount:function, when `<Lisent/>` component mounted, it will be fired,
+ * The arguments of didMount is the instances of `Machine` you just put in `to` property.
+ */
 const Like = () => (
     <Listen
         to={[LikeMachine]}
@@ -56,7 +57,7 @@ const Like = () => (
 
 /**
  * <Provider/> is necessary wrapper for this system.
-*/
+ */
 ReactDOM.render(
     <Provider>
         <Like />
@@ -66,6 +67,12 @@ ReactDOM.render(
 ```
 
 Now done, simple as that. We have create some awesome code here.
+
+## Middleware free
+
+`redux` has a great middleware mechanism to help developer to deal with `side-effects`, such as `http request`. In rectx, you might not need middlewares. Check out the exsample for async class function:
+
+[codeSandbox](https://codesandbox.io/s/l970jx93pz)
 
 ## Inspiration
 
