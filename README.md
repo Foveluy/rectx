@@ -1,6 +1,6 @@
 # Rectx
 
-> React + Context -> Rectx, a light-weight state manager.
+React + Context -> Rectx, a light-weight state manager.
 
 ## Installation
 
@@ -17,7 +17,8 @@ import { Provider, Machine, Listen } from 'rectx'
 
 class LikeMachine extends Machine {
     state = {
-        isLike: false
+        isLike: false,
+        isMount: false
     }
 
     handleClick = () => {
@@ -28,7 +29,7 @@ class LikeMachine extends Machine {
 }
 
 const Like = () => (
-    <Listen to={[LikeMachine]}>
+    <Listen to={[LikeMachine]} >
         {like => (
             <div>
                 <button onClick={() => like.handleClick()} />
@@ -47,5 +48,11 @@ ReactDOM.render(
 ```
 
 Now done, simple as that. We have create some awesome code here. 
+
+## Inspiration
+
+this library inspirated by [unstated](https://unstated.io)
+
+
 
 
