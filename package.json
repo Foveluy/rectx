@@ -1,16 +1,9 @@
 {
     "name": "rectx",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "main": "index.js",
     "description": "React + Context -> Rectx, a light-weight state manager.",
-    "dependencies": {},
-    "scripts": {
-        "build": "./node_modules/.bin/babel --out-dir ./dist ./lib/ ",
-        "start": "node scripts/start.js",
-        "test": "node scripts/test.js --env=jsdom",
-        "p":"npm run build && npm publish"
-    },
-    "devDependencies": {
+    "dependencies": {
         "@babel/plugin-proposal-class-properties": "^7.0.0-beta.44",
         "@babel/plugin-transform-runtime": "^7.0.0-beta.44",
         "@babel/preset-env": "^7.0.0-beta.44",
@@ -19,7 +12,13 @@
         "@babel/core": "^7.0.0-beta.44",
         "@babel/plugin-syntax-object-rest-spread": "^7.0.0-beta.44",
         "@babel/preset-react": "^7.0.0-beta.44",
-        "babel-plugin-import": "^1.6.2",
-        "babel-preset-es2015": "^6.24.1"
-    }
+        "babel-plugin-import": "^1.6.2"
+    },
+    "scripts": {
+        "build": "./node_modules/.bin/babel --out-dir ./dist ./lib/ ",
+        "start": "node scripts/start.js",
+        "test": "node scripts/test.js --env=jsdom",
+        "p": "npm run build && npm publish"
+    },
+    "devDependencies": {}
 }

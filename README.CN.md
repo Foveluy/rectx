@@ -17,7 +17,8 @@ import { Provider, Machine, Listen } from 'rectx'
 
 class LikeMachine extends Machine {
     state = {
-        isLike: false
+        isLike: false,
+        isMount: false
     }
 
     handleClick = () => {
@@ -28,10 +29,16 @@ class LikeMachine extends Machine {
 }
 
 const Like = () => (
-    <Listen to={[LikeMachine]}>
+    <Listen
+        to={[LikeMachine]}
+        didMount={like => {
+            like.setState({ isMount: true })
+        }}
+    >
         {like => (
             <div>
-                <button onClick={() => like.handleClick()} />
+                <button onClick={() => like.handleClick()}>Click me</button>
+                <div>{like.state.isMount ? 'component being loaded' : 'component not loaded'}</div>
                 <div>{like.state.isLike ? 'I love you' : 'I hate you'}</div>
             </div>
         )}
