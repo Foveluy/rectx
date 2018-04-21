@@ -13,9 +13,9 @@ npm install --save rectx
 ```js
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Provider, Machine, Listen } from 'rectx'
+import { Provider, Controller, Listen } from 'rectx'
 
-class LikeMachine extends Machine {
+class LikeController extends Controller {
     state = {
         isLike: false,
         isMount: false
@@ -30,7 +30,7 @@ class LikeMachine extends Machine {
 
 const Like = () => (
     <Listen
-        to={[LikeMachine]}
+        to={[LikeController]}
         didMount={like => {
             like.setState({ isMount: true })
         }}

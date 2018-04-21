@@ -13,13 +13,13 @@ npm install --save rectx @babel/runtime
 ```js
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Provider, Machine, Listen } from 'rectx'
+import { Provider, Controller, Listen } from 'rectx'
 
 /**
- * we create a state machine `LikeMachine` inherit from Machine
+ * we create a state machine `LikeController` inherit from Controller
  * define a class function `handleClick` for setting state by calling `this.setState`
  */
-class LikeMachine extends Machine {
+class LikeController extends Controller {
     state = {
         isLike: false,
         isMount: false
@@ -40,7 +40,7 @@ class LikeMachine extends Machine {
  */
 const Like = () => (
     <Listen
-        to={[LikeMachine]}
+        to={[LikeController]}
         didMount={like => {
             like.setState({ isMount: true })
         }}
