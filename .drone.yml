@@ -1,0 +1,5 @@
+pipeline:
+  build:
+    image: node:8.9.3
+    commands:
+      - npm install
