@@ -67,14 +67,26 @@ it('multicomponent render without crash', async () => {
   let foo = ''
   let foo2 = ''
   let render = 0
+  let afterFoo = ''
+  let afterFoo2 = ''
 
   const m = (ctl1, Ctl2) => {
-    ctl1.setState(draft => {
-      draft.foo = 'hello'
-    })
-    Ctl2.setState(draft => {
-      draft.foo = 'hello 2'
-    })
+    ctl1.setState(
+      draft => {
+        draft.foo = 'hello'
+      },
+      after => {
+        afterFoo = after.foo
+      }
+    )
+    Ctl2.setState(
+      draft => {
+        draft.foo = 'hello 2'
+      },
+      after => {
+        afterFoo2 = after.foo
+      }
+    )
   }
 
   const wrapper = mount(
@@ -95,4 +107,6 @@ it('multicomponent render without crash', async () => {
   expect(foo).equal('hello')
   expect(foo2).equal('hello 2')
   expect(render).equal(3)
+  expect(afterFoo).equal('hello')
+  expect(afterFoo2).equal('hello 2')
 })

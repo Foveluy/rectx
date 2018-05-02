@@ -1,6 +1,6 @@
 {
   "name": "rectx",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "index.js",
   "description": "React + Context -> Rectx, a light-weight state manager.",
   "dependencies": {
@@ -19,7 +19,7 @@
     "regenerator-runtime": "^0.11.1"
   },
   "scripts": {
-    "build": "./node_modules/.bin/babel --out-dir ./dist ./src/ ",
+    "build": "./node_modules/.bin/babel --out-dir ./dist ./src/index.js ",
     "start": "node scripts/start.js",
     "test": "react-scripts test --env=jsdom",
     "p": "npm run build && npm publish",

@@ -19,6 +19,7 @@
 [download-image]: https://img.shields.io/npm/dm/rectx.svg?style=flat-square
 [download-url]: https://npmjs.org/package/rectx
 
+![](https://github.com/215566435/rectx/blob/master/docs/rectx.png?raw=true)
 
 React + Context -> Rectx, a light-weight state manager with mutable api.
 
