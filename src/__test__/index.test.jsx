@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { configure, mount, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import { expect } from 'chai'
-import { Provider, Controller, Listen } from '..'
+import { Provider, Controller, Listen } from '../../dist'
 
 configure({ adapter: new Adapter() })
 

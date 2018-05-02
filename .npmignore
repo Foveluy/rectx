@@ -1,3 +1,5 @@
 src
 test
 __test__
+doc
+.babelrc

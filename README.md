@@ -30,7 +30,7 @@ Rectx requires React > 16, but if you are using React < 16, I think it would be 
 ## Installation
 
 ```bash
-npm install --save rectx @babel/runtime
+npm install --save rectx babel-core
 ```
 
 ## Simple Usage
