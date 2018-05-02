@@ -36,23 +36,19 @@ export class Controller {
         newState = { ...this.state, ...partial }
       }
 
-      if (this.state !== newState) {
-        this.state = newState
-
-        let callback_length = this.setFaterState.length
-
-        this.setFaterState.forEach(({ fn, id }) => {
-          fn(this.state, () => {
-            callback_length--
-            if (callback_length <= 0) {
-              this.isDirty = false
-            }
-            cb && cb(this.state)
-          })
-        })
-      }
-      // no matter what `newState` is, we have to set state to original state
       this.state = newState
+
+      let callback_length = this.setFaterState.length
+      this.setFaterState.forEach(({ fn, id }) => {
+        fn(this.state, () => {
+          callback_length--
+          if (callback_length <= 0) {
+            this.isDirty = false
+          }
+          cb && cb(this.state)
+        })
+      })
+      // no matter what `newState` is, we have to set state to original state
     })
   }
 }
@@ -88,7 +84,7 @@ export class Listen extends React.Component {
   }
 
   _noopUpdate = (state, cb) => {
-    if (this._isMounted) this.setState({}, cb)
+    this.setState({}, cb)
   }
 
   createMachine = context => {
