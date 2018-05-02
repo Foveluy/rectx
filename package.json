@@ -1,25 +1,41 @@
 {
-    "name": "rectx",
-    "version": "0.1.5",
-    "main": "index.js",
-    "description": "React + Context -> Rectx, a light-weight state manager.",
-    "dependencies": {
-        "@babel/plugin-proposal-class-properties": "^7.0.0-beta.44",
-        "@babel/plugin-transform-runtime": "^7.0.0-beta.44",
-        "@babel/preset-env": "^7.0.0-beta.44",
-        "babel-preset-react-app": "^3.1.1",
-        "@babel/cli": "^7.0.0-beta.44",
-        "@babel/core": "^7.0.0-beta.44",
-        "@babel/plugin-syntax-object-rest-spread": "^7.0.0-beta.44",
-        "@babel/preset-react": "^7.0.0-beta.44",
-        "@babel/runtime": "^7.0.0-beta.44",
-        "babel-plugin-import": "^1.6.2"
-    },
-    "scripts": {
-        "build": "./node_modules/.bin/babel --out-dir ./dist ./lib/ ",
-        "start": "node scripts/start.js",
-        "test": "node scripts/test.js --env=jsdom",
-        "p": "npm run build && npm publish"
-    },
-    "devDependencies": {}
+  "name": "rectx",
+  "version": "0.1.5",
+  "main": "index.js",
+  "description": "React + Context -> Rectx, a light-weight state manager.",
+  "dependencies": {
+    "@babel/cli": "^7.0.0-beta.44",
+    "@babel/core": "^7.0.0-beta.46",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.44",
+    "@babel/plugin-syntax-object-rest-spread": "^7.0.0-beta.44",
+    "@babel/plugin-transform-runtime": "^7.0.0-beta.44",
+    "@babel/preset-env": "^7.0.0-beta.44",
+    "@babel/preset-react": "^7.0.0-beta.44",
+    "@babel/runtime": "^7.0.0-beta.44",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^22.4.3",
+    "create-react-context": "^0.2.2",
+    "immer": "^1.2.1",
+    "regenerator-runtime": "^0.11.1"
+  },
+  "scripts": {
+    "build": "./node_modules/.bin/babel --out-dir ./dist ./src/ ",
+    "start": "node scripts/start.js",
+    "test": "react-scripts test --env=jsdom",
+    "p": "npm run build && npm publish",
+    "cov": "npm test -- --coverage",
+    "ci": "npm run cov && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "coveralls": "^3.0.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-context-patch": "0.0.6",
+    "jest": "^22.4.3",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-scripts": "^1.1.4",
+    "react-test-renderer": "^16.3.2"
+  }
 }

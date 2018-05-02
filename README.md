@@ -2,6 +2,10 @@
 
 React + Context -> Rectx, a light-weight state manager.
 
+## React version requires
+
+Rectx requires React > 16, but if you are using React < 16, I think it would be ok :)
+
 ## Installation
 
 ```bash
