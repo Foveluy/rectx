@@ -1,13 +1,14 @@
 {
   "name": "rectx",
-  "version": "0.3.12",
+  "version": "0.3.13",
   "main": "index.js",
   "description": "React + Context -> Rectx, a light-weight state manager.",
   "dependencies": {
+    "@babel/core": "^7.0.0-beta.46",
     "@babel/runtime": "^7.0.0-beta.44",
-    "immer": "^1.2.1",
+    "babel-core": "^7.0.0-bridge.0",
     "create-react-context": "^0.2.2",
-    "babel-core": "^7.0.0-bridge.0"
+    "immer": "^1.2.1"
   },
   "scripts": {
     "build": "./node_modules/.bin/babel --out-dir ./dist ./src/index.js ",

@@ -2,8 +2,6 @@ import React from 'react'
 import createReactContext from 'create-react-context'
 import produce from 'immer'
 
-
-
 const Context = createReactContext()
 let ListenerID = 0
 
@@ -63,14 +61,6 @@ export class Listen extends React.Component {
     this.state = {}
     this.Machines = []
     this._isMounted = false
-  }
-  shouldComponentUpdate() {
-    for (let i in this.Machines) {
-      if (this.Machines[i].isDirty === true) {
-        return true
-      }
-    }
-    return false
   }
 
   componentWillUnmount() {
