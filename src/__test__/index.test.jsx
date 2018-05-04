@@ -247,7 +247,7 @@ describe('test for rectx', () => {
   })
   
 
-  it('will not update when controller state are not change', async () => {
+  it('will update when controller state are not change', async () => {
     let renderTimes = 0
     let willUpdateRenderTimes = 0
     class Clr extends Controller {
@@ -280,7 +280,7 @@ describe('test for rectx', () => {
       </Provider>
     )
     await noop()
-    expect(renderTimes).equal(1)
+    expect(renderTimes).equal(2)
   })
 
   it('nesting with ListenWillNotUpdate && ListenWillUpdate,', async () => {
