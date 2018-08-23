@@ -1,3 +1,3 @@
-const Rectx = require('./dist')
+const Rectx = require('./dist');
 
-module.exports = Rectx
+module.exports = Rectx;

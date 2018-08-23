@@ -1,124 +1,67 @@
-import React from 'react'
-import createReactContext from 'create-react-context'
-import produce from 'immer'
+import React from 'react';
+import produce from 'immer';
+import equal from 'fast-deep-equal';
 
-const Context = createReactContext()
-let ListenerID = 0
+function createSubscribe() {
+  const listener = [];
 
-export class Controller {
-  constructor() {
-    this.state = {}
-    this.setFaterState = []
-    this.produce = produce
-    this.isDirty = false
-    this.map = new Map()
-  }
+  const listen = updator => {
+    listener.push(updator);
+  };
 
-  addListener = (setState, id) => {
-    if (!this.map.get(id)) {
-      this.map.set(id, true)
-      this.setFaterState.push({ fn: setState, id: id })
+  const unListen = l => {
+    listener.splice(listener.indexOf(l), 1);
+  };
+
+  const update = updator => {
+    for (let i = 0; i < listener.length; i++) {
+      listener[i](updator);
+    }
+  };
+  return {listen, unListen, update};
+}
+
+export function init(store) {
+  const {listen, unListen, update} = createSubscribe();
+
+  class Provider extends React.PureComponent {
+    state = store;
+
+    reRender = updator => {
+      if (typeof updator === 'function') {
+        const newState = produce(this.state, draft => {
+          updator(draft);
+        });
+        if (!equal(newState, this.state)) {
+          this.setState(newState);
+        }
+        return;
+      }
+
+      if (!equal(updator, this.state)) {
+        this.setState(updator);
+      }
+    };
+    componentWillUnmount() {
+      unListen(this.reRender);
+    }
+
+    componentDidMount() {
+      listen(this.reRender);
+    }
+
+    render() {
+      return this.props.children(this.state);
     }
   }
 
-  removeListener = id => {
-    this.map.delete(id)
-    this.setFaterState = this.setFaterState.filter(i => i.id !== id)
-  }
-
-  setState(partial, cb) {
-    this.isDirty = true
-    setImmediate(() => {
-      let newState
-      if (typeof partial === 'function') {
-        newState = produce(this.state, partial)
-      } else {
-        newState = { ...this.state, ...partial }
+  return {
+    Ctx: props => {
+      if (typeof props !== 'function') {
+        return <Provider>{props.children}</Provider>;
       }
-
-      this.state = newState
-
-      let callback_length = this.setFaterState.length
-      this.setFaterState.forEach(({ fn, id }) => {
-        fn(this.state, () => {
-          callback_length--
-          if (callback_length <= 0) {
-            this.isDirty = false
-          }
-          cb && cb(this.state)
-        })
-      })
-      // no matter what `newState` is, we have to set state to original state
-    })
-  }
-}
-
-export class Listen extends React.Component {
-  constructor(props) {
-    ListenerID++
-    super(props)
-    this.id = ListenerID
-    this.state = {}
-    this.Machines = []
-    this._isMounted = false
-  }
-
-  componentWillUnmount() {
-    this.Machines.forEach(m => {
-      m.removeListener(this.id)
-    })
-    this._isMounted = false
-  }
-
-  componentDidMount() {
-    this._isMounted = true
-    this.props.didMount && this.props.didMount.apply(null, this.Machines)
-  }
-
-  _noopUpdate = (state, cb) => {
-    this.setState({}, cb)
-  }
-
-  createMachine = context => {
-    if (context === void 666) {
-      throw new Error('<Listen/> components must be wrapped in a <Provider/>')
-    }
-
-    const MachineConstructor = this.props.to
-
-    let newMachines = MachineConstructor.map(Machine => {
-      if (context.get(Machine)) {
-        const instance = context.get(Machine)
-        instance.addListener(this._noopUpdate.bind(this), this.id)
-        return instance
-      }
-
-      let newInstance = new Machine()
-      newInstance.addListener(this._noopUpdate.bind(this), this.id)
-      context.set(Machine, newInstance)
-      return newInstance
-    })
-
-    this.Machines = newMachines
-    return this.Machines
-  }
-
-  render() {
-    return (
-      <Context.Consumer>{context => this.props.children.apply(null, this.createMachine(context))}</Context.Consumer>
-    )
-  }
-}
-
-export class Provider extends React.Component {
-  render() {
-    return (
-      <Context.Consumer>
-        {topState => {
-          let childState = new Map(topState)
-          return <Context.Provider value={childState}>{this.props.children}</Context.Provider>
-        }}
-      </Context.Consumer>
-    )
-  }
+      return <Provider>{props}</Provider>;
+    },
+    Put: update,
+  };
 }
