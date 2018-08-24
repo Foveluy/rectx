@@ -35,7 +35,10 @@ export function init(store) {
   const {listen, unListen, update} = createSubscribe();
 
   class Provider extends React.PureComponent {
-    state = store;
+    constructor(props) {
+      super(props);
+      this.state = store;
+    }
 
     reRender = updator => {
       if (typeof updator === 'function') {

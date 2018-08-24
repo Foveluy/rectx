@@ -158,12 +158,12 @@ describe('test for rectx', () => {
 
   test('`Auto` and `Ctx` testting ', async () => {
     let renderTimes = 0;
+    const Dumb = Auto(s => s.dummy);
     const Dummy = ({data}) => {
       renderTimes = renderTimes + 1;
       return <div id="dummy">{data}</div>;
     };
 
-    const Dumb = Auto(s => s.dummy);
 
     const App = () => (
       <div>
