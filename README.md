@@ -43,7 +43,7 @@ npm install --save rectx
 
 ## 最简单的使用
 
-当然了，这个例子如果你看就懂，那我非常建议你直接去看我是如何处理，使得不需要写 `shouldComponentUpdate` 的
+当然了，这个例子如果你看就懂，那我非常建议你直接去看我是如何处理，使得不需要写 `shouldComponentUpdate` 的[code sandbox 例子](https://codesandbox.io/s/ly62j89q39)
 
 ```js
 import React from 'react';
@@ -61,7 +61,36 @@ const App = () => (
 
 render(<App />, document.getElementById('root'));
 ```
+值得注意的是,`Put(s => (s.foo = s.foo + 1))` 在这里，我们直接修改了我们的数值，当数据非常复杂的时候，这种操作方式尤为珍贵。
+
+## Val 快速选择器
+
+
 
 ## 无需 `shouldComponentUpdate` 的组件 `Auto`
 
 [code sandbox 例子](https://codesandbox.io/s/ly62j89q39)
+
+```js
+import React from "react";
+import { render } from "react-dom";
+import { init } from "rectx";
+
+const { Put, Ctx, Auto } = init({ foo: 1, bar: 1 });
+
+const Bars = Auto(s => s.bar);
+
+const App = () => (
+  <div>
+    <Ctx>{s => <div>Foo:{s.foo}</div>}</Ctx>
+    {Bars(bar => <div>Bar:{bar}</div>)}
+    <button onClick={() => Put(s => (s.foo = s.foo + 1))}>change Foo</button>
+    <button onClick={() => Put(s => (s.bar = s.bar + 1))}>change Bar</button>
+  </div>
+);
+
+render(<App />, document.getElementById("root"));
+```
+首先 `Auto` 是一个 `selector`，其作用是获取全局的状态，从中选出 **你关心的** 属性，当这些属性被选择出来以后，**只要这些属性没有被更新**，那么他们所返回的组件 **一定不会** 更新。同时，外部的属性是否更新，跟他们同样没有任何关系。
+
+熟悉 React 的同学，一定知道这么做的珍贵之处，再也不用手动书写 `shouldComponentUpdate` 了。
