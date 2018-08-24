@@ -34,9 +34,11 @@ npm install --save rectx
 
 新版本的 `rectx` 有着强大的功能，他不仅能提供一个状态库，甚至能提供一个良好的类型辅助系统，这也意味着你可以在 `TypeScript` 中支持它！
 
+- [x] 并不依赖 `react.context api`，支持 15、16 版本的 `react`
+- [x] `mutable api`，再也不用写模版代码
 - [x] 完整的测试，测试覆盖率极高
-- [x] `typescript` 的 `d.ts` 支持
-- [x] 不用写 `shouldComponentUpdate` 的组件
+- [x] `typescript` 的 `d.ts` 支持，非常友好的类型提示
+- [x] 不用写 `shouldComponentUpdate` 的组件 `Auto`（自动）
 - [x] 高性能，轻量
 
 ## 最简单的使用
