@@ -22,15 +22,26 @@
 
 ![](https://github.com/Foveluy/rectx/blob/master/docs/rectx.png?raw=true)
 
-React + Context -> Rectx, a light-weight state manager with mutable api.
+> React + Context -> Rectx, a light-weight state manager with mutable api.
 
-## Installation
+## 安装
 
 ```bash
 npm install --save rectx
 ```
 
-## Simple Usage
+## 特点
+
+新版本的 `rectx` 有着强大的功能，他不仅能提供一个状态库，甚至能提供一个良好的类型辅助系统，这也意味着你可以在 `TypeScript` 中支持它！
+
+- [x] 完整的测试，测试覆盖率极高
+- [x] `typescript` 的 `d.ts` 支持
+- [x] 不用写 `shouldComponentUpdate` 的组件
+- [x] 高性能，轻量
+
+## 最简单的使用
+
+当然了，这个例子如果你看就懂，那我非常建议你直接去看我是如何处理，使得不需要写 `shouldComponentUpdate` 的
 
 ```js
 import React from 'react';
@@ -48,3 +59,7 @@ const App = () => (
 
 render(<App />, document.getElementById('root'));
 ```
+
+## 无需 `shouldComponentUpdate` 的组件 `Auto`
+
+[code sandbox 例子](https://codesandbox.io/s/ly62j89q39)
