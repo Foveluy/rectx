@@ -1,6 +1,6 @@
 {
   "name": "rectx",
-  "version": "1.0.7",
+  "version": "1.1.2",
   "main": "index.js",
   "description": "React + Context -> Rectx, a light-weight state manager.",
   "dependencies": {
@@ -9,7 +9,7 @@
     "immer": "^1.5.0"
   },
   "scripts": {
-    "build": "./node_modules/.bin/babel --out-dir ./dist ./src/index.js ",
+    "build": "./node_modules/.bin/babel --out-dir ./dist ./src/index.js && cp ./src/index.d.ts ./dist/src/ ",
     "start": "node scripts/start.js",
     "test": "react-scripts test --env=jsdom",
     "p": "npm run build && npm publish",
