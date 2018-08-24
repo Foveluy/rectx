@@ -8,7 +8,7 @@ import {init} from '..';
 configure({adapter: new Adapter()});
 
 describe('test for rectx', () => {
-  const {Put, Ctx} = init({
+  const {Put, Ctx, Val, Auto} = init({
     value: 1,
     dummy: 1,
   });
@@ -68,17 +68,73 @@ describe('test for rectx', () => {
     expect(node.getDOMNode().textContent).equal('2');
   });
 
-  test('auto should component update 1', async () => {
+  test('`Val` works with one component', async () => {
+    const Dumb = Val(s => s.dummy);
+
+    const DumbApp = () => (
+      <div>
+        {Dumb(dummy => (
+          <div id="dummy">{dummy}</div>
+        ))}
+      </div>
+    );
+
+    const wrapper = mount(<DumbApp />);
+    const id_dummy = wrapper.find('#dummy');
+
+    //before update
+    expect(id_dummy.getDOMNode().textContent).equal('1');
+
+    Put(s => (s.dummy = 2));
+
+    // after update
+    expect(id_dummy.getDOMNode().textContent).equal('2');
+  });
+
+  test('`Val` works with mutiple components', async () => {
+    const Dumb = Val(s => s.dummy);
+
+    const DumbApp = () => (
+      <div>
+        {Dumb(dummy => (
+          <div id="dummy">{dummy}</div>
+        ))}
+        {Dumb(dummy => (
+          <div id="dummy2">{dummy}</div>
+        ))}
+      </div>
+    );
+
+    const wrapper = mount(<DumbApp />);
+    const id_dummy = wrapper.find('#dummy');
+    const id_dummy2 = wrapper.find('#dummy');
+
+    //before update
+    expect(id_dummy.getDOMNode().textContent).equal('1');
+    expect(id_dummy2.getDOMNode().textContent).equal('1');
+
+    Put(s => (s.dummy = 2));
+
+    // after update
+    expect(id_dummy.getDOMNode().textContent).equal('2');
+    expect(id_dummy2.getDOMNode().textContent).equal('2');
+  });
+
+  test('`Val` and `Ctx` testing ', async () => {
     let renderTimes = 0;
     const Dummy = ({data}) => {
       renderTimes = renderTimes + 1;
       return <div id="dummy">{data}</div>;
     };
 
+    const Dumb = Val(s => s.dummy);
+
     const App = () => (
       <div>
         <div>
-          <Ctx>{s => <Dummy data={s.dummy} />}</Ctx>
+          {Dumb(dummy => (
+            <Dummy data={dummy} />
+          ))}
         </div>
         <Ctx>{s => <div id="test-div-render-props">{s.value}</div>}</Ctx>
       </div>
@@ -86,6 +142,43 @@ describe('test for rectx', () => {
 
     const wrapper = mount(<App />);
     const node = wrapper.find('#test-div-render-props');
+    const id_dummy = wrapper.find('#dummy');
+    expect(node.getDOMNode().textContent).equal('1');
+    expect(renderTimes).equal(1);
+
+    Put(s => (s.value = 2));
+
+    expect(renderTimes).equal(2);
+    expect(node.getDOMNode().textContent).equal('2');
+    Put(s => (s.dummy = 10));
+
+    expect(node.getDOMNode().textContent).equal('2');
+    expect(id_dummy.getDOMNode().textContent).equal('10');
+  });
+
+  test('`Auto` and `Ctx` testting ', async () => {
+    let renderTimes = 0;
+    const Dummy = ({data}) => {
+      renderTimes = renderTimes + 1;
+      return <div id="dummy">{data}</div>;
+    };
+
+    const Dumb = Auto(s => s.dummy);
+
+    const App = () => (
+      <div>
+        <div>
+          {Dumb(dummy => (
+            <Dummy data={dummy} />
+          ))}
+        </div>
+        <Ctx>{s => <div id="test-div-render-props">{s.value}</div>}</Ctx>
+      </div>
+    );
+
+    const wrapper = mount(<App />);
+    const node = wrapper.find('#test-div-render-props');
+    const id_dummy = wrapper.find('#dummy');
     expect(node.getDOMNode().textContent).equal('1');
     expect(renderTimes).equal(1);
 
@@ -93,6 +186,11 @@ describe('test for rectx', () => {
 
     expect(renderTimes).equal(1);
     expect(node.getDOMNode().textContent).equal('2');
+    Put(s => (s.dummy = 10));
+
+    expect(renderTimes).equal(2);
+    expect(node.getDOMNode().textContent).equal('2');
+    expect(id_dummy.getDOMNode().textContent).equal('10');
   });
 
   // it('renders without crashing', () => {

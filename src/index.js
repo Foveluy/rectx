@@ -2,6 +2,16 @@ import React from 'react';
 import produce from 'immer';
 import equal from 'fast-deep-equal';
 
+class Wrapper extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    return !equal(this.props.data, nextProps.data);
+  }
+
+  render() {
+    return this.props.fn(this.props.data);
+  }
+}
+
 function createSubscribe() {
   const listener = [];
 
@@ -63,5 +73,27 @@ export function init(store) {
       return <Provider>{props}</Provider>;
     },
     Put: update,
+    Auto: selector => {
+      return fn => {
+        return (
+          <Provider>
+            {state => {
+              return <Wrapper data={selector(state)} fn={fn} />;
+            }}
+          </Provider>
+        );
+      };
+    },
+    Val: selector => {
+      return fn => {
+        return (
+          <Provider>
+            {state => {
+              return fn(selector(state));
+            }}
+          </Provider>
+        );
+      };
+    },
   };
 }
