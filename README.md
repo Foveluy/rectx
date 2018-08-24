@@ -8,18 +8,18 @@
 
 [npm-image]: https://img.shields.io/npm/v/rectx.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/rectx
-[travis-image]: https://img.shields.io/travis/215566435/rectx.svg?style=flat-square
-[travis-url]: https://travis-ci.org/215566435/rectx
-[coveralls-image]: https://img.shields.io/coveralls/215566435/rectx.svg?style=flat-square
-[coveralls-url]: https://coveralls.io/r/215566435/rectx?branch=master
-[david-image]: https://img.shields.io/david/215566435/rectx.svg?style=flat-square
-[david-url]: https://david-dm.org/215566435/rectx
+[travis-image]: https://img.shields.io/travis/foveluy/rectx.svg?style=flat-square
+[travis-url]: https://travis-ci.org/foveluy/rectx
+[coveralls-image]: https://img.shields.io/coveralls/foveluy/rectx.svg?style=flat-square
+[coveralls-url]: https://coveralls.io/r/foveluy/rectx?branch=master
+[david-image]: https://img.shields.io/david/foveluy/rectx.svg?style=flat-square
+[david-url]: https://david-dm.org/foveluy/rectx
 [node-image]: https://img.shields.io/badge/node.js-%3E=_8.0-green.svg?style=flat-square
 [node-url]: http://nodejs.org/download/
 [download-image]: https://img.shields.io/npm/dm/rectx.svg?style=flat-square
 [download-url]: https://npmjs.org/package/rectx
 
-![](https://github.com/215566435/rectx/blob/master/docs/rectx.png?raw=true)
+![](https://github.com/foveluy/rectx/blob/master/docs/rectx.png?raw=true)
 
 React + Context -> Rectx, a light-weight state manager with mutable api.
 
