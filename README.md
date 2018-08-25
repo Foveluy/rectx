@@ -22,7 +22,7 @@
 
 ![](https://github.com/Foveluy/rectx/blob/master/docs/rectx.png?raw=true)
 
-> React + Context -> Rectx, a light-weight state manager with mutable api.
+>  a light-weight state manager with mutable api.
 
 ## 安装
 
@@ -30,9 +30,22 @@
 npm install --save rectx
 ```
 
+## 又一个轮子？
+
+`Redux` 和 `Mobx` 都非常的棒，但对于大部分项目都只是 `CRUD` 的项目来说，这些个玩意儿都略显太重了。而且对于 `react` 的 immutable 哲学而言，实在是模版代码相当的多，对新手、高手、熟练工都不是很友好：新手觉得复杂，高手觉得烦躁，熟练工觉得不够快。再加上，`react` 函数式编程以及 DOM-diff 依赖的是 `html tag` 的缘故，因此我们需要手动优化，臭名昭著的 `shouldComponentUpdate` 由此而来。
+
+为了更好的解决上述的一些问题，我开始寻找一种方式能够解决：
+1. 模版化很少
+2. 无需手动 `shouldComponentUpdate`
+3. API 极少，学习成本低
+4. `mutable` API
+
+以下就是我的解决方案。
+
+
 ## 特点
 
-新版本的 `rectx` 有着强大的功能，他不仅能提供一个状态库，甚至能提供一个良好的类型辅助系统，这也意味着你可以在 `TypeScript` 中支持它！
+`rectx` 有着强大的功能，他不仅能提供一个状态库，甚至能提供一个良好的类型辅助系统，这也意味着你可以在 `TypeScript` 中支持它！
 
 - [x] 并不依赖 `react.context api`，支持 15、16 版本的 `react`
 - [x] `mutable api`，再也不用写模版代码
@@ -69,6 +82,19 @@ render(<App />, document.getElementById('root'));
 [code sandbox 例子](https://codesandbox.io/s/ly62j89q39)
 
 ```js
+import { init } from "rectx";
+
+const { Put, Ctx, Auto } = init({ foo: 1, bar: 1 });
+```
+首先我们依然是引入我们的组件，`Put` 用于更新，`Ctx` 用于获取，那么 `Auto` 是一个什么鬼？
+
+`Auto` 是一个选择器，他能够分离我们的 Store ，把每一个 Store 切分成一个小粒度的`块`，使得我们的代码更加简洁。比如我们想获取全局状态 `store` 中的，`bar`，我们就可以：
+```js
+const Bars = Auto(s => s.bar);
+```
+当我们使用 `Bars` 的时候，我们获取到的就是 bar 这个属性了。当然，`Auto` 翻译为自动，这是他第一个`自动的`地方，第二个特点请看下面：
+
+```js
 import React from "react";
 import { render } from "react-dom";
 import { init } from "rectx";
@@ -91,3 +117,17 @@ render(<App />, document.getElementById("root"));
 首先 `Auto` 是一个 `selector`，其作用是获取全局的状态，从中选出 **你关心的** 属性，当这些属性被选择出来以后，**只要这些属性没有被更新**，那么他们所返回的组件 **一定不会** 更新。同时，外部的属性是否更新，跟他们同样没有任何关系。
 
 熟悉 React 的同学，一定知道这么做的珍贵之处，再也不用手动书写 `shouldComponentUpdate` 了。
+
+
+## 类型提示
+
+得益于 `typescript`， `Rectx` 得到了良好的类型提示。
+
+![](https://github.com/Foveluy/rectx/blob/master/docs/leixing1.png?raw=true)
+当我们初始化 `store` 以后，我们的 `store` 里面具体有什么值，在纯 js 中并没有智能提示，但加入了 ts 之后，一切会大不一样
+
+![](https://github.com/Foveluy/rectx/blob/master/docs/leixing2.png?raw=true)
+
+## 开源协议 
+
+MIT
