@@ -63,9 +63,6 @@ render(<App />, document.getElementById('root'));
 ```
 值得注意的是,`Put(s => (s.foo = s.foo + 1))` 在这里，我们直接修改了我们的数值，当数据非常复杂的时候，这种操作方式尤为珍贵。
 
-## Val 快速选择器
-
-
 
 ## 无需 `shouldComponentUpdate` 的组件 `Auto`
 
