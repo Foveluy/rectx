@@ -1,6 +1,6 @@
 test
 __test__
-doc
+docs
 .babelrc
 coverage
 ./src
