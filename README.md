@@ -22,7 +22,7 @@
 
 ![](https://github.com/Foveluy/rectx/blob/master/docs/rectx.png?raw=true)
 
-> React + Context -> Rectx, a light-weight state manager with mutable api.
+> a light-weight state manager with mutable api.
 
 ## 安装
 
