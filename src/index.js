@@ -6,7 +6,6 @@ class Wrapper extends React.Component {
   shouldComponentUpdate(nextProps) {
     return !equal(this.props.data, nextProps.data);
   }
-
   render() {
     return this.props.fn(this.props.data);
   }
@@ -14,21 +13,15 @@ class Wrapper extends React.Component {
 
 function createSubscribe() {
   const listener = [];
-
-  const listen = updator => {
-    listener.push(updator);
+  return {
+    listen: updator => listener.push(updator),
+    unListen: l => listener.splice(listener.indexOf(l), 1),
+    update: updator => {
+      for (let i = 0; i < listener.length; i++) {
+        listener[i](updator);
+      }
+    },
   };
-
-  const unListen = l => {
-    listener.splice(listener.indexOf(l), 1);
-  };
-
-  const update = updator => {
-    for (let i = 0; i < listener.length; i++) {
-      listener[i](updator);
-    }
-  };
-  return {listen, unListen, update};
 }
 
 export function init(store) {
@@ -82,17 +75,6 @@ export function init(store) {
           <Provider>
             {state => {
               return <Wrapper data={selector(state)} fn={fn} />;
-            }}
-          </Provider>
-        );
-      };
-    },
-    Val: selector => {
-      return fn => {
-        return (
-          <Provider>
-            {state => {
-              return fn(selector(state));
             }}
           </Provider>
         );
