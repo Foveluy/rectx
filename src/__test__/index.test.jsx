@@ -1,6 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {configure, mount, shallow} from 'enzyme';
+import {configure, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import {expect} from 'chai';
 import {init} from '..';
@@ -67,9 +66,9 @@ describe('test for rectx', () => {
     Store.Put(s => (s.value = 2));
 
     // expect(node.getDOMNode().textContent).equal('2');
-    expect(Store._store().value).equal(2);
+    expect(Store.Store().value).equal(2);
     Store.Put(s => (s.value = 10));
-    expect(Store._store().value).equal(10);
+    expect(Store.Store().value).equal(10);
   });
 
   test('`Ctx` can be a render-props funtion', async () => {

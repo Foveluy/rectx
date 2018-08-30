@@ -3,10 +3,10 @@ import * as React from 'react';
 type GetFn<T> = (state: T) => React.ReactNode;
 type PrevState<T> = (prevState: T) => T;
 
-
 interface State<T> {
+  Store: () => T;
   Ctx: (
-    fn: GetFn<S> | {children: (state: T) => React.ReactNode}
+    fn: GetFn<T> | {children: (state: T) => React.ReactNode}
   ) => React.ReactNode;
   Put: (nextState: T | PrevState<T>) => void;
   Val: <S = any>(

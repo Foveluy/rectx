@@ -70,7 +70,7 @@ export function init(_store) {
   }
 
   return {
-    _store: () => store,
+    Store: () => store,
     Ctx: props => {
       if (typeof props !== 'function') {
         return <Provider>{props.children}</Provider>;
