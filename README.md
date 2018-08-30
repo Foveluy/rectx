@@ -118,6 +118,27 @@ render(<App />, document.getElementById("root"));
 
 熟悉 React 的同学，一定知道这么做的珍贵之处，再也不用手动书写 `shouldComponentUpdate` 了。
 
+## 读取全局状态 Store
+
+有时候，有的同学想读取全局的 Store ，我特意提供了一个 API，给大家这么做，特别注意的是**这个API 是只读的**。
+
+```
+import React from "react";
+import { render } from "react-dom";
+import { init } from "rectx";
+
+const { Put, Ctx, Auto,Store } = init({ foo: 1, bar: 1 });
+
+const store = Store();
+
+console.log(store)//  { foo: 1, bar: 1 }
+
+Put(state => state.foo = 2);
+
+console.log(store)//  { foo: 2, bar: 1 }
+
+```
+
 
 ## 类型提示
 
