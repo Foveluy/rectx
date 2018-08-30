@@ -9,9 +9,6 @@ interface State<T> {
     fn: GetFn<T> | {children: (state: T) => React.ReactNode}
   ) => React.ReactNode;
   Put: (nextState: T | PrevState<T>) => void;
-  Val: <S = any>(
-    selector: (state: T) => S
-  ) => (fn: GetFn<S>) => React.ReactNode;
   Auto: <S = any>(
     selector: (state: T) => S
   ) => (

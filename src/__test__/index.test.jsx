@@ -89,6 +89,67 @@ describe('test for rectx', () => {
     expect(node.getDOMNode().textContent).equal('2');
   });
 
+  test('`Put` without function call will not update', async () => {
+    const {Put, Ctx} = init({
+      value: 1,
+      dummy: 1,
+    });
+    const App = () => (
+      <Ctx>{s => <div id="test-div-render-props">{s.value}</div>}</Ctx>
+    );
+
+    const wrapper = mount(<App />);
+    const node = wrapper.find('#test-div-render-props');
+    expect(node.getDOMNode().textContent).equal('1');
+
+    Put({value: 10});
+
+    expect(node.getDOMNode().textContent).equal('1');
+  });
+
+  test('`Put` without function call will not update, and no component', async () => {
+    const {Put, Ctx, Store} = init({
+      value: 1,
+      dummy: 1,
+    });
+
+    Put({value: 10});
+
+    expect(Store().value).equal(1);
+  });
+
+  test('if everthing is equal, then will not update, and no component', async () => {
+    const {Put, Ctx, Store} = init({
+      value: 1,
+      dummy: 1,
+    });
+
+    Put(s => (s.value = 1));
+
+    expect(Store().value).equal(1);
+  });
+
+  test('if everthing is equal, then will not update', async () => {
+    const {Put, Ctx} = init({
+      value: 1,
+      dummy: 1,
+    });
+    let render = 0;
+    const App = () => {
+      render = render + 1;
+      return <Ctx>{s => <div id="test-div-render-props">{s.value}</div>}</Ctx>;
+    };
+
+    const wrapper = mount(<App />);
+    const node = wrapper.find('#test-div-render-props');
+    expect(node.getDOMNode().textContent).equal('1');
+
+    Put(s => (s.value = 1));
+
+    expect(node.getDOMNode().textContent).equal('1');
+    expect(render).equal(1);
+  });
+
   // test('`Val` works with one component', async () => {
   //   const Dumb = Val(s => s.dummy);
 
