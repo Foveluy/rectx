@@ -1,11 +1,11 @@
 {
   "name": "rectx",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "main": "index.js",
-  "description": "React + Context -> Rectx, a light-weight state manager.",
+  "description": "Rectx, a light-weight state manager.",
   "dependencies": {
     "fast-deep-equal": "^2.0.1",
-    "immer": "^1.5.0"
+    "immer": "^1.7.2"
   },
   "scripts": {
     "build": "./node_modules/.bin/babel --out-dir ./dist ./src/index.js && cp ./src/index.d.ts ./dist/src/ ",

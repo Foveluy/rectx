@@ -13,7 +13,9 @@ describe('test for rectx', () => {
       dummy: 1,
     });
 
-    const TestComponent = () => Ctx(s => <div id="test-div">{s.value}</div>);
+    const TestComponent = () => (
+      <Ctx>{s => <div id="test-div">{s.value}</div>}</Ctx>
+    );
     const wrapper = mount(<TestComponent />);
     const node = wrapper.find('#test-div');
     expect(node.getDOMNode().textContent).equal('1');
@@ -25,7 +27,9 @@ describe('test for rectx', () => {
       dummy: 1,
     });
 
-    const TestComponent = () => Ctx(s => <div id="test-div">{s.value}</div>);
+    const TestComponent = () => (
+      <Ctx>{s => <div id="test-div">{s.value}</div>}</Ctx>
+    );
     const wrapper = mount(<TestComponent />);
     const node = wrapper.find('#test-div');
     expect(node.getDOMNode().textContent).equal('1');
@@ -40,7 +44,9 @@ describe('test for rectx', () => {
       value: 1,
       dummy: 1,
     });
-    const TestComponent = () => Ctx(s => <div id="test-div">{s.value}</div>);
+    const TestComponent = () => (
+      <Ctx>{s => <div id="test-div">{s.value}</div>}</Ctx>
+    );
     const wrapper = mount(<TestComponent />);
     const node = wrapper.find('#test-div');
     expect(node.getDOMNode().textContent).equal('1');
@@ -55,8 +61,9 @@ describe('test for rectx', () => {
       value: 1,
       dummy: 1,
     });
-    const TestComponent = () =>
-      Store.Ctx(s => <div id="test-div">{s.value}</div>);
+    const TestComponent = () => (
+      <Store.Ctx>{s => <div id="test-div">{s.value}</div>}</Store.Ctx>
+    );
 
     const wrapper = mount(<TestComponent />);
     const node = wrapper.find('#test-div');
@@ -278,12 +285,6 @@ describe('test for rectx', () => {
     expect(node.getDOMNode().textContent).equal('2');
     expect(id_dummy.getDOMNode().textContent).equal('10');
   });
-
-  // it('renders without crashing', () => {
-  //   const wrapper = mount(<TestComponent />);
-  //   const node = wrapper.find('#test-div');
-  //   expect(node.getDOMNode().textContent).equal('bar');
-  // });
 
   // it('mutate state after click (async) ', async () => {
   //   const wrapper = mount(<TestClass />);

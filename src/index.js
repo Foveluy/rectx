@@ -71,23 +71,10 @@ export function init(_store) {
 
   return {
     Store: () => store,
-    Ctx: props => {
-      if (typeof props !== 'function') {
-        return <Provider>{props.children}</Provider>;
-      }
-      return <Provider>{props}</Provider>;
-    },
+    Ctx: props => <Provider>{props.children}</Provider>,
     Put: update,
-    Auto: selector => {
-      return fn => {
-        return (
-          <Provider>
-            {state => {
-              return <Wrapper data={selector(state)} fn={fn} />;
-            }}
-          </Provider>
-        );
-      };
-    },
+    Auto: selector => fn => (
+      <Provider>{state => <Wrapper data={selector(state)} fn={fn} />}</Provider>
+    ),
   };
 }
