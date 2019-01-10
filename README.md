@@ -129,13 +129,12 @@ import { init } from "rectx";
 
 const { Put, Ctx, Auto,Store } = init({ foo: 1, bar: 1 });
 
-const store = Store();
 
-console.log(store);//  { foo: 1, bar: 1 }
+console.log(Store());//  { foo: 1, bar: 1 }
 
 Put(state => state.foo = 2);
 
-console.log(store);//  { foo: 2, bar: 1 }
+console.log(Store());//  { foo: 2, bar: 1 }
 
 ```
 
