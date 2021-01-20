@@ -4197,10 +4197,10 @@ ignore@^3.3.3:
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.3.10.tgz#0a97fb876986e8081c631160f8f9f389157f0043"
   integrity sha512-Pgs951kaMm5GXP7MOvxERINe3gsaVjUWFm+UZPSq9xYriQAksyhg0csnS0KXSNRD5NmNdapXEpjxG49+AKh/ug==
 
-immer@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/immer/-/immer-2.0.0.tgz#d834c874d2d249f73511af39f3ef1ed3b7411132"
-  integrity sha512-qwwvbGbidU0P5SjO4s1wZ9hjNj8fQ908UVtKDSAYgxuDiY1MFylCvsQJSr/fUUo3aeHdxZapdpzPi3vpwTUXUQ==
+immer@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-8.0.1.tgz#9c73db683e2b3975c424fb0572af5889877ae656"
+  integrity sha512-aqXhGP7//Gui2+UrEtvxZxSquQVXTpZ7KDxfCcKAF3Vysvw0CViVaW9RZ1j1xlIYqaaaipBoqdqeibkc18PNvA==
 
 import-lazy@^2.1.0:
   version "2.1.0"

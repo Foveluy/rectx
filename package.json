@@ -5,7 +5,7 @@
   "description": "Rectx, a light-weight state manager.",
   "dependencies": {
     "fast-deep-equal": "^2.0.1",
-    "immer": "^2.0.0"
+    "immer": "^8.0.1"
   },
   "scripts": {
     "build": "./node_modules/.bin/babel --out-dir ./dist ./src/index.js && cp ./src/index.d.ts ./dist/src/ ",
